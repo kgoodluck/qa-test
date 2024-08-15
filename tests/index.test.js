@@ -17,7 +17,7 @@ test.describe("Hacker News Article Sorting", () => {
         const timestampsOfArticles = await getTimestampsByLimit(page, ARTICLES_LIMIT);
 
         // Ensure we retrieved enough timestamps
-        expect(timestampsOfArticles.length).toBe(10);
+        expect(timestampsOfArticles.length).toBe(ARTICLES_LIMIT);
 
         // Validate that the timestamps are sorted in descending order
         const isSorted = getIsSortedDescending(timestampsOfArticles);
