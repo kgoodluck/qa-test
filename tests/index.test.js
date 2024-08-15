@@ -3,7 +3,7 @@ const { chromium, test, expect } = require("@playwright/test");
 const ARTICLES_LIMIT = 100;
 
 test.describe("Hacker News Article Sorting", () => {
-    test("Validate that the first 100 articles are sorted from newest to oldest", async () => {
+    test(`Validate that the first ${ARTICLES_LIMIT} articles are sorted from newest to oldest`, async () => {
         // Launch browser
         const browser = await chromium.launch({ headless: true });
         const context = await browser.newContext();
@@ -63,7 +63,7 @@ test.describe("Hacker News Article Sorting", () => {
 
     function isSortedDescending(timestamps) {
         for (let i = 1; i < timestamps.length; i++) {
-            if (timestamps[i - 1] < timestamps[i]) {
+            if (new Date(timestamps[i - 1]) < new Date(timestamps[i])) {
                 return false;
             }
         }

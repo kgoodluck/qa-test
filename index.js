@@ -50,7 +50,7 @@ async function getTimestampsByLimit(page, articlesLimit) {
 
 async function getVisibleTimestampsFromPage(page) {
   return await page
-    .locator("#hnmain .subtext .subline .age")
+    .locator("#hnmain .subtext .age")
     .evaluateAll((articles) => articles.map((article) => article.getAttribute("title")));
 }
 
