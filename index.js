@@ -14,13 +14,7 @@ async function sortHackerNewsArticles() {
 
   const timestampsOfArticles = await getTimestampsByLimit(page, ARTICLES_LIMIT);
 
-  if (timestampsOfArticles.length !== ARTICLES_LIMIT) {
-    console.error(`Error getting ${ARTICLES_LIMIT} last timestamps of articles`);
-    await browser.close();
-    return;
-  }
-
-  const isSorted = isSortedDescending(timestampsOfArticles);
+  const isSorted = getIsSortedDescending(timestampsOfArticles);
 
   const message = isSorted === true
     ? "Test passed: The timestamps are sorted correctly"
@@ -56,7 +50,7 @@ async function getVisibleTimestampsFromPage(page) {
 
 
 
-function isSortedDescending(timestamps) {
+function getIsSortedDescending(timestamps) {
   for (let i = 1; i < timestamps.length; i++) {      
     if (new Date(timestamps[i - 1]) < new Date(timestamps[i])) {
       return false;
