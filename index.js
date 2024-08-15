@@ -14,7 +14,7 @@ async function sortHackerNewsArticles() {
 
   const timestampsOfArticles = await getTimestampsByLimit(page, ARTICLES_LIMIT);
 
-  if (timestampsOfArticles.length < ARTICLES_LIMIT) {
+  if (timestampsOfArticles.length !== ARTICLES_LIMIT) {
     console.error(`Error getting ${ARTICLES_LIMIT} last timestamps of articles`);
     await browser.close();
     return;
@@ -49,9 +49,9 @@ async function getTimestampsByLimit(page, articlesLimit) {
 
 
 async function getVisibleTimestampsFromPage(page) {
-  return await page.locator('#hnmain .subtext .subline .age').evaluateAll(articles => 
-    articles.map(article => article.getAttribute('title'))
-  );
+  return await page
+    .locator("#hnmain .subtext .subline .age")
+    .evaluateAll((articles) => articles.map((article) => article.getAttribute("title")));
 }
 
 
