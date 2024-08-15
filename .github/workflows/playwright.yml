@@ -19,10 +19,17 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '20'
 
       - name: Install dependencies
         run: npm install
 
       - name: Run Playwright tests
         run: npx playwright test
+      
+      - name: Upload Playwright test results
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: playwright-results
+          path: playwright-report/
