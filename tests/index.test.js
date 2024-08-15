@@ -5,7 +5,7 @@ const ARTICLES_LIMIT = 100;
 test.describe("Hacker News Article Sorting", () => {
     test("Validate that the first 100 articles are sorted from newest to oldest", async () => {
         // Launch browser
-        const browser = await chromium.launch({ headless: false });
+        const browser = await chromium.launch({ headless: true });
         const context = await browser.newContext();
         const page = await context.newPage();
 
